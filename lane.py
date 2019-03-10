@@ -12,7 +12,9 @@ def display_lines(image, lines):
     line_image = np.zeros_like(image)
     if lines is not None:
         for line in lines:
-            print(line)
+            x1, y1, x2, y2 = line.reshape(4)
+            cv2.line(line_image, (x1, y1), (x2,y2), (255, 0, 0), 10)
+    return line_image
 
 
 def region_of_interest(image):
@@ -30,5 +32,5 @@ canny = canny(lane_image)
 cropped_image = region_of_interest(canny)
 lines = cv2.HoughLinesP(cropped_image, 2, np.pi/180, 100, np.array([]), minLineLength=40, maxLineGap=5)
 line_image = display_lines(lane_image, lines)
-cv2.imshow('result', cropped_image)
+cv2.imshow('result', line_image)
 cv2.waitKey(0)
