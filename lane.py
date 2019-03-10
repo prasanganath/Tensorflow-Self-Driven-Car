@@ -9,6 +9,18 @@ def average_slope_intercept(image, lines):
         parameters = np.polyfit((x1, x2), (y1, y2), 1)
         slope = parameters[0]
         intercept = parameters[1]
+        if slope < 0:
+            left_fit.append((slope, intercept))
+        else:
+            right_fit.append((slope, intercept))
+
+    left_fit_average = np.average(left_fit, axis=0)
+    right_fit_average = np.average(right_fit, axis=0)
+    print(left_fit_average, 'left')
+    print(right_fit_average, 'right')
+
+
+
 
 
 
